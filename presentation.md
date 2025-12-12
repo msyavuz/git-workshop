@@ -177,3 +177,86 @@ Seçenekler:
 - **reword**: Commit mesajını değiştir
 - **squash**: Önceki commit ile birleştir
 - **drop**: Commit'i sil
+
+---
+
+# Merge Conflict Nedir?
+
+Git aynı dosyanın aynı bölümünde farklı değişiklikler olduğunda otomatik birleştirme yapamaz.
+
+**Ne zaman oluşur:**
+- İki branch aynı satırı değiştirdiğinde
+- Bir branch dosyayı silerken diğeri düzenlediğinde
+- Merge veya rebase sırasında
+
+---
+
+# Conflict İşaretleri
+
+```diff
+<<<<<<< HEAD
+console.log("Main branch kodu");
+=======
+console.log("Feature branch kodu");
+>>>>>>> feature-branch
+```
+
+- `<<<<<<< HEAD`: Mevcut branch'teki kod
+- `=======`: Ayırıcı
+- `>>>>>>> feature-branch`: Merge edilen branch'teki kod
+
+---
+
+# Conflict Çözme - Adım 1 & 2
+
+1. **Conflict'li dosyaları bul:**
+```bash
+git status
+```
+
+2. **Dosyaları düzenle** - İşaretleri kaldır, doğru kodu bırak
+
+---
+
+# Conflict Çözme - Adım 3 & 4
+
+3. **Değişiklikleri ekle:**
+```bash
+git add dosya.txt
+```
+
+4. **Merge'ü tamamla:**
+```bash
+git commit
+```
+
+---
+
+# Conflict Çözme İpuçları
+
+- **Takım arkadaşınızla konuşun** - Hangi kod kalmalı?
+- **Test edin** - Çözüm sonrası kod çalışıyor mu?
+- **IDE araçlarını kullanın** - VS Code, IntelliJ conflict çözme araçları
+- **git mergetool** - Görsel araçlar için
+
+```bash
+git mergetool
+```
+
+---
+
+# Conflict'i İptal Etme
+
+Merge'ü iptal etmek için:
+```bash
+git merge --abort
+```
+
+Rebase'i iptal etmek için:
+```bash
+git rebase --abort
+```
+
+Bu komutlar conflict öncesi duruma döndürür.
+
+---
