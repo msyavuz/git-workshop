@@ -52,6 +52,19 @@ git clone https://github.com/apache/superset.git
 
 ---
 
+# Repository
+
+- Git sadece dosyalar üzerinde çalışır. İçi boş bir klasör git için bir şey ifade etmez.
+- Repo klasöründe `.gitignore` isimli bir dosya oluşturarak bazı dosyaları göz ardı edebilirsiniz.
+
+```
+node_modules
+.env
+.venv
+```
+
+---
+
 # Commit
 
 Yaptığınız değişikliklerin kaydedilmiş bir anlık görüntüsü. Checkpoint ya da kayıtlı oyun gibi düşünebilirsiniz.
