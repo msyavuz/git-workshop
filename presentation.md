@@ -81,3 +81,99 @@ git branch -d msyavuz/feat/implement-sync
 ![Branch visual](./assets/branch-example.png)
 
 ---
+
+# Merge
+
+İki branch'i birleştirmenin en yaygın yolu. Yeni bir "merge commit" oluşturur.
+
+```bash
+git checkout main
+git merge feature-branch
+```
+
+**Özellikleri:**
+- Tüm geçmiş korunur
+- Merge commit ile kim, ne zaman birleştirdi görülür
+- Branch yapısı karmaşık olabilir
+
+---
+
+# Merge Örneği
+
+```
+main:     A---B---C---F (merge commit)
+               \     /
+feature:        D---E
+```
+
+Feature branch'teki D ve E commit'leri main'e merge edildiğinde F merge commit'i oluşur.
+
+---
+
+# Rebase
+
+Branch'inizi başka bir branch'in üzerine "yeniden temellendirir". Commit'leri yeniden yazar.
+
+```bash
+git checkout feature-branch
+git rebase main
+```
+
+**Özellikleri:**
+- Temiz, lineer geçmiş
+- Merge commit yok
+- Public branch'lerde tehlikeli!
+
+---
+
+# Rebase Örneği - Önce
+
+```
+main:     A---B---C
+               \
+feature:        D---E
+```
+
+---
+
+# Rebase Örneği - Sonra
+
+```
+main:     A---B---C
+                   \
+feature:            D'---E'
+```
+
+D ve E commit'leri C'nin üzerine yeniden yazılır (D' ve E' olur).
+
+---
+
+# Merge vs Rebase - Ne Zaman Merge?
+
+- Public/paylaşılan branch'lerde
+- Geçmişi korumak istediğinizde
+- Takım çalışmalarında güvenli seçenek
+
+---
+
+# Merge vs Rebase - Ne Zaman Rebase?
+
+- Local feature branch'lerde
+- Temiz geçmiş istediğinizde
+- Push etmeden önce main ile senkronize olurken
+
+---
+
+# Interactive Rebase
+
+Rebase yaparken her commiti editleyerek devam etmenizi sağlar
+
+```bash
+git rebase -i HEAD~3  # Son 3 commit'i düzenle
+```
+
+Seçenekler:
+- **pick**: Commit'i koru
+- **reword**: Commit mesajını değiştir
+- **squash**: Önceki commit ile birleştir
+- **drop**: Commit'i sil
